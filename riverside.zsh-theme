@@ -38,5 +38,5 @@ function _riverside::git {
 }
 
 PROMPT='$(_riverside::separator)
-%F{8}:: %F{yellow}%n%F{red}@%F{green}%m%f %F{8}::%f $(_riverside::venv)%F{cyan}$(_riverside::pwd)%f$(_riverside::git_changes)$(_riverside::git)%(?.. [%?])
+%F{8}:: %F{yellow}%n%F{red}@%F{green}%m%f %F{8}::%f $(_riverside::venv)%F{cyan}$(_riverside::pwd)%f$(_riverside::git_changes)$(_riverside::git)%(?.. %F{8}[%F{red}%?%F{8}]%f)
 %F{yellow}⤗ %f '
