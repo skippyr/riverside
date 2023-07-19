@@ -1,42 +1,45 @@
 setopt promptsubst
-export VIRTUAL_ENV_DISABLE_PROMPT="1"
+export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-function _riverside::separator {
-  for i in $(seq 1 ${COLUMNS}); do
-    [[ $((i % 2)) -eq 0 ]] &&
-      printf "%%F{yellow}⩟%%f" ||
-      printf "%%F{red}⩣%%f"
-  done
+__Riverside()
+{
+	Get_Separator()
+	{
+		for i in {1..${COLUMNS}}; do
+			[[ $(( i % 2 )) -eq 0 ]] && printf "%%F{3}⩟%%f" || printf "%%F{1}⩣%%f"
+		done
+	}
+
+	Get_Virtual_Environment()
+	{
+		[[ ${VIRTUAL_ENV} ]] && echo "%f(${VIRTUAL_ENV##*/}) "
+	}
+
+	Get_Directory()
+	{
+		typeset -a d=("${(s./.)PWD/${HOME}/~}")
+		[[ ${#d} > 1 ]] && for i in {1..$((${#d} - 1))}; do
+			[[ "${d[i]}" == .* ]] && d[i]=${d[i][1,2]} || d[i]=${d[i][1]}
+		done
+		echo ${(j./.)d}
+	}
+
+	Get_Changes()
+	{
+		[[ $(git status --porcelain 2>/dev/null) ]] && echo "%F{3}✗"
+	}
+
+	Get_Branch()
+	{
+		typeset -r b=$(git branch --show-current 2>/dev/null)
+		[[ ${b} ]] && echo " $(Get_Changes)%F{4}git:(%F{1}${b}%F{4})"
+	}
+
+	echo "$(Get_Separator)%F{8}:: %F{3}%n%F{1}@%F{2}%m %F{8}::"\
+	     "$(Get_Virtual_Environment)%F{6}$(Get_Directory)$(Get_Branch)"\
+		  "%(?..%F{4}[%F{1}%?%F{4}])"
 }
 
-function _riverside::venv {
-  typeset -r venv=${VIRTUAL_ENV##*/}
-  [[ -n ${venv} ]] &&
-    echo "(${venv}) "
-}
+PROMPT='$(__Riverside)
+%F{3}⤗ %f '
 
-function _riverside::pwd {
-  typeset -a pwd=("${(s./.)PWD/${HOME}/~}")
-  [[ ${#pwd} > 1 ]] &&
-  for splits_iterator in {1..$((${#pwd} - 1))}; do
-    [[ "${pwd[splits_iterator]}" == .* ]] &&
-      pwd[splits_iterator]="${pwd[splits_iterator][1,2]}" ||
-      pwd[splits_iterator]="${pwd[splits_iterator][1]}"
-  done
-  echo "${(j./.)pwd}"
-}
-
-function _riverside::git_changes {
-  [[ -n $(git status --porcelain 2>/dev/null) ]] &&
-    echo " %F{yellow}✗%f"
-}
-
-function _riverside::git {
-  typeset -r branch=$(git branch --show-current 2>/dev/null)
-  [[ -n ${branch} ]] &&
-    echo " %F{blue}git:(%F{red}${branch}%F{blue})%f" ||
-}
-
-PROMPT='$(_riverside::separator)
-%F{8}:: %F{yellow}%n%F{red}@%F{green}%m%f %F{8}::%f $(_riverside::venv)%F{cyan}$(_riverside::pwd)%f$(_riverside::git_changes)$(_riverside::git)%(?.. %F{8}[%F{red}%?%F{8}]%f)
-%F{yellow}⤗ %f '

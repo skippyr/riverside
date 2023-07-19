@@ -1,77 +1,79 @@
 # Riverside
 
-## Starting Point
+## Description
 
-The Riverside project is a theme for the ZSH shell that is inspired by the
-`robbyrussel` and `kafeitu` themes. It is also a more portable version of
-my old theme: [River Dreams](https://github.com/skippyr/river_dreams).
+A more portable and simpler version of my other theme: [River Dreams](https://github.com/skippyr/river-dreams).
 
 ![](images/preview.png)
 
-> In this preview, the Riverside theme was used within the [Kitty terminal emulator](https://github.com/kovidgoyal/kitty)
-> with the [Flamerial theme](https://github.com/skippyr/flamerial). Font is
-> [Iosevka](https://github.com/be5invis/Iosevka) (variant `ss08`).
+> **Note**
+>
+> The theme may look different in your setup as its appearance depends of what
+> colors and font you are using for your terminal emulator. Use the preview as
+> just a reference.
+>
+> Theme used for terminal emulator is [Flamerial](https://github.com/skippyr/flamerial).
 
-## Features
-
-This theme can show you the following information:
-
--   The exit code of failed commands.
--   Your user and hostname.
--   The name of sourced virtual environments.
--   Your current directory path abbreviated.
--   If inside a Git repository, the name of the branch and if has changes to be
-    commited.
-
-## Dependencies
-
-This theme has some dependencies that you need to download before installing it.
-
--   git
-
-    This is the terminal utility used to obtain information about your Git
-    repositories.
+Here is the description of its design:
+-	Shows your user and host names.
+-	Sourced virtual environments will appear inside parenthesis.
+-	If inside a Gir repository, it shows the current branch. If there are changes
+	to be commited, it will prefix it with an `x` symbol.
+-	If your last command failed, its exit code will be shown.
 
 ## Installation
 
-You can install this theme in multiple ways, use the one that suits you best.
+### Dependencies
 
-### Manually
+The following dependencies must be installed to run this software:
 
--   Run the following command to install the theme at
-    `~/.local/share/zsh/themes/riverside`.
+| Dependency | Description |
+|-|-|
+| `git` | Required to retrive information about Git repositories. |
+| [Noto Font](https://fonts.google.com/noto/specimen/Noto+Sans) | Provides the required pretty symbols. |
 
-    ```bash
-    git clone --depth=1 https://github.com/skippyr/riverside ~/.local/share/zsh/themes/riverside &&
-    echo "source \"${HOME}/.local/share/zsh/themes/riverside/riverside.zsh-theme\"" >> ~/.zshrc
-    ```
+### Manual Procedures
 
--   Reopen your terminal emulator.
+Use the following instructions to install this theme manually.
 
-### Within OhMyZSH
+-	Run the following command inside of a terminal emulator to install the theme.
+```bash
+git clone --depth=1 https://github.com/skippyr/riverside\
+                    ~/.local/share/zsh/themes/riverside &&
+echo "source ~/.local/share/zsh/themes/riverside/riverside.zsh-theme" >>\
+     ~/.zshrc
+```
 
--   Install the theme in OhMyZSH custom themes' directory.
+-	Reopen the terminal emulator to load the theme.
 
-    ```bash
-    git clone --depth=1 https://github.com/skippyr/riverside ${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/themes/riverside
-    ```
+### Procedures With OhMyZSH
 
--   Change the value of the `ZSH_THEME` variable in your ZSH configuration file,
-    `~/.zshrc`, to use the theme.
+Use the following instructions to install this theme for OhMyZSH.
 
-    ```bash
-    ZSH_THEME="riverside/riverside"
-    ```
+-	Run the following command inside of a terminal emulator to install the theme.
 
--   Reopen your terminal emulator.
+```bash
+git clone --depth=1 https://github.com/skippyr/riverside\
+                    ${ZSH_CUSTOM:-${HOME}/.oh-my-zsh/custom}/themes/riverside
+```
 
-## Issues And Suggestions
+-	Change the value of the `ZSH_THEME` variable in your ZSH configuration file,
+	`~/.zshrc`, to use the theme:
 
-Report issues and suggestions through the [issues tab](https://github.com/skippyr/riverside/issues).
+```bash
+ZSH_THEME=riverside/riverside
+```
 
-## License
+-	Reopen your terminal emulator to load the theme.
 
-This project is released under the terms of the MIT license. A copy of the
-license is bundled with the source code.
+## Support
+
+Report issues, questions and suggestion through the [issues tab](https://github.com/skippyr/riverside/issues).
+
+## Copyright
+
+This software is distributed under the MIT License. A copy of the license is
+bundled with the source code.
 
 Copyright (c) 2023, Sherman Rofeman. MIT license.
+
