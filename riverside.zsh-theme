@@ -37,7 +37,7 @@ __Riverside()
 
 	echo "$(Get_Separator)%F{8}:: %F{3}%n%F{1}@%F{2}%m %F{8}::"\
 	     "$(Get_Virtual_Environment)%F{6}$(Get_Directory)$(Get_Branch)"\
-		  "%(?..%F{4}[%F{1}%?%F{4}])"
+	     "%(?..%F{4}[%F{1}%?%F{4}])"
 }
 
 PROMPT='$(__Riverside)
