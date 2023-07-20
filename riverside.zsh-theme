@@ -1,7 +1,7 @@
 setopt promptsubst
 export VIRTUAL_ENV_DISABLE_PROMPT=1
 
-__Riverside()
+__riverside_t()
 {
 	Get_Separator()
 	{
@@ -40,6 +40,6 @@ __Riverside()
 	     "%(?..%F{4}[%F{1}%?%F{4}])"
 }
 
-PROMPT='$(__Riverside)
+PROMPT='$(__riverside_t)
 %F{3}⤗ %f '
 
